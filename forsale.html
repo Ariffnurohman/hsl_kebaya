@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Sale</title>
+
+  <!--Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+    rel="stylesheet" />
+  <!--Feather Icon-->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!--Style-->
+  <link rel="stylesheet" href="../css/forsale.css" /> <!-- Link ke CSS untuk halaman For Sale -->
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+      font-size: small;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 1rem 2rem;
+      position: fixed;
+      /* Mengatur posisi navbar menjadi fixed */
+      top: 0;
+      /* Menempatkan navbar di bagian atas */
+      left: 0;
+      /* Menempatkan navbar di sisi kiri */
+      width: 100%;
+      /* Lebar penuh */
+      z-index: 10;
+      /* Pastikan navbar berada di atas elemen lain */
+      transition: background-color 0.3s;
+      /* Transisi untuk efek perubahan warna */
+    }
+
+    .navbar-logo {
+      color: #fff6e3;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    .navbar-nav {
+      display: flex;
+    }
+
+    .navbar-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    .navbar-logo span {
+      color: #ffccea;
+      /* Highlight color */
+    }
+
+
+    .navbar-nav a:hover {
+      color: #ffcc00;
+      /* Highlight color on hover */
+    }
+
+    .navbar-extra a {
+      color: #fff;
+      margin-left: 1rem;
+      padding: 10px 15px;
+      /* Tambahkan padding untuk tombol */
+      border: 1px solid transparent;
+      /* Border transparan untuk efek hover */
+      border-radius: 4px;
+      /* Sudut melengkung */
+      transition: background-color 0.3s, border-color 0.3s;
+      /* Transisi untuk efek hover */
+    }
+
+    .navbar-extra a:hover {
+      background-color: #ffcc00;
+      /* Warna latar belakang saat hover */
+      border-color: #ffcc00;
+      /* Warna border saat hover */
+      color: #333;
+      /* Ubah warna teks saat hover */
+    }
+
+    /* Style Khusus untuk Tombol Login */
+    #login-button {
+      background-color: #fff;
+      /* Warna latar belakang tombol login */
+      color: #333;
+      /* Warna teks tombol login */
+      padding: 10px 15px;
+      /* Padding untuk tombol */
+      border-radius: 4px;
+      /* Sudut melengkung */
+      border: 1px solid #ffff;
+      /* Border dengan warna yang sama */
+      transition: background-color 0.3s, color 0.3s;
+      /* Transisi untuk efek hover */
+    }
+
+    #login-button:hover {
+      background-color: #333;
+      /* Ubah warna latar belakang saat hover */
+      color: #ffff;
+      /* Ubah warna teks saat hover */
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      /* Sembunyikan modal secara default */
+      position: fixed;
+      /* Tetap di posisi tetap */
+      z-index: 100;
+      /* Di atas elemen lain */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Lebar penuh */
+      height: 100%;
+      /* Tinggi penuh */
+      overflow: auto;
+      /* Tambahkan scroll jika diperlukan */
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Latar belakang semi-transparan */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      /* 15% dari atas dan tengah */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      /* Lebar modal */
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 10px 0 5px;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .gallery {
+      padding: 50px 20px;
+      /* Memberikan padding di sekitar gallery */
+      text-align: center;
+      /* Mengatur teks agar berada di tengah */
+      background-color: #f4f4f4;
+      /* Latar belakang yang lembut */
+    }
+
+    .gallery h1 {
+      font-size: 2rem;
+      /* Ukuran font untuk judul gallery */
+      margin-bottom: 20px;
+      /* Jarak di bawah judul */
+      color: #333;
+      /* Warna teks */
+      padding: 50px 20px;
+    }
+
+    .gallery-container {
+      display: grid;
+      /* Menggunakan grid untuk tata letak gambar */
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      /* Mengatur kolom grid */
+      gap: 15px;
+      /* Jarak antara gambar */
+      max-width: 1200px;
+      /* Lebar maksimum container */
+      margin: 0 auto;
+      /* Memusatkan container */
+    }
+
+    .gallery-container img {
+      width: 100%;
+      /* Gambar mengambil lebar penuh dari grid item */
+      height: auto;
+      /* Memastikan tinggi gambar otomatis */
+      border-radius: 8px;
+      /* Sudut melengkung untuk gambar */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      /* Bayangan halus di bawah gambar */
+      transition: transform 0.3s;
+      /* Transisi halus saat hover */
+      margin: 10px;
+    }
+
+    .gallery-container img:hover {
+      transform: scale(1.05);
+      /* Efek zoom saat hover */
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        display: none;
+        /* Sembunyikan navbar-nav pada layar kecil */
+        flex-direction: column;
+        /* Atur agar item ditampilkan secara vertikal */
+        position: absolute;
+        /* Agar navbar tidak mempengaruhi layout */
+        background-color: #333;
+        /* Warna latar belakang navbar */
+        width: 100%;
+        /* Lebar penuh */
+        top: 60px;
+        /* Sesuaikan dengan tinggi navbar */
+        left: 0;
+        /* Posisi kiri */
+        z-index: 10;
+        /* Pastikan di atas elemen lain */
+      }
+
+      .navbar-nav.active {
+        display: flex;
+        /* Tampilkan navbar-nav ketika kelas 'active' ditambahkan */
+      }
+
+      .navbar-extra {
+        display: flex;
+        /* Tampilkan navbar-extra */
+      }
+
+      .navbar-extra a {
+        margin-left: 0.5rem;
+        /* Tambahkan margin untuk item di navbar-extra */
+      }
+
+      table {
+        font-size: 14px;
+        /* Ukuran font lebih kecil pada perangkat kecil */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .navbar-extra {
+        display: none;
+        /* Sembunyikan navbar-extra pada layar besar */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo"><span>Hasogi</span> Live Show.</a>
+
+    <div class="navbar-nav">
+        <a href="index.html">Home</a>
+        <a href="tentangkami.html">Tentang Kami</a>
+        <a href="menu.html">Produk</a>
+        <a href="syaratdanketentuan.html">Syarat Dan Ketentuan</a>
+        <a href="forsale.html">Gallery</a>
+        <a href="contact.html">Contact Service</a>
+        <a href="#" id="login-button">Login</a> <!-- Tombol Login -->
+    </div>
+
+    <div class="navbar-extra">
+      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+
+
+  <!-- Modal Login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login</h2>
+      <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p>Belum punya akun? <a href="register.php" id="register-link">Buat akun di sini</a></p>
+    </div>
+  </div>
+
+  <!-- Gallery Section Start -->
+  <section class="gallery">
+    <h1>Gallery</h1>
+    <div class="gallery-container">
+      <img src="gallery1.jpg" alt="Image 1" />
+      <img src="gallery1.jpg" alt="Image 2" />
+      <img src="gallery1.jpg" alt="Image 3" />
+      <img src="gallery1.jpg" alt="Image 4" />
+      <img src="gallery1.jpg" alt="Image 5" />
+      <img src="gallery1.jpg" alt="Image 6" />
+
+
+    </div>
+  </section>
+  <!-- Gallery Section End -->
+
+  <!--Feather Icon-->
+  <script>
+    // Mengubah warna navbar saat menggulir
+    window.onscroll = function() {
+      const navbar = document.querySelector('.navbar');
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        navbar.style.backgroundColor = "#222"; // Warna saat menggulir
+      } else {
+        navbar.style.backgroundColor = "#333"; // Warna default
+      }
+    };
+
+    // Mendapatkan modal
+    var modal = document.getElementById("login-modal");
+
+    // Mendapatkan tombol yang membuka modal
+    var btn = document.getElementById("login-button");
+
+    // Mendapatkan elemen <span> yang menutup modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Ketika pengguna mengklik tombol, buka modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // Ketika pengguna mengklik <span> (x), tutup modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Ketika pengguna mengklik di luar modal, tutup modal
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Menangani pengiriman form login
+    document.getElementById("login-form").onsubmit = function(event) {
+      event.preventDefault(); // Mencegah pengiriman form default
+      // Ambil nilai username dan password
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Lakukan proses login (misalnya, kirim ke server)
+      console.log("Username:", username);
+      console.log("Password:", password);
+
+      // Tutup modal setelah login
+      modal.style.display = "none";
+    };
+
+    feather.replace();
+  </script>
+
+  <!--My Javascript-->
+  <script src="script.js"></script>
+</body>
+
+</html>

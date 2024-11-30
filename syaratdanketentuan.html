@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarat dan Ketentuan</title>
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+        rel="stylesheet" />
+    <!--Feather Icon-->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        background-color: #D3F1DF;
+        color: #333;
+        padding-top: 60px;
+        /* Memberikan ruang di atas konten untuk navbar */
+        font-size: small;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 1rem 2rem;
+        position: fixed;
+        /* Mengatur posisi navbar menjadi fixed */
+        top: 0;
+        /* Menempatkan navbar di bagian atas */
+        left: 0;
+        /* Menempatkan navbar di sisi kiri */
+        width: 100%;
+        /* Lebar penuh */
+        z-index: 10;
+        /* Pastikan navbar berada di atas elemen lain */
+        transition: background-color 0.3s;
+        /* Transisi untuk efek perubahan warna */
+    }
+
+    .navbar-logo {
+        color: #FFF6E3;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+    }
+
+    .navbar-nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 1rem;
+        transition: color 0.3s;
+    }
+
+    .navbar-nav a:hover {
+        color: #ffcc00;
+        /* Highlight color on hover */
+    }
+
+    .navbar-logo span {
+        color: #FFCCEA;
+        /* Highlight color */
+    }
+
+    .navbar-extra a {
+        color: #fff;
+        margin-left: 1rem;
+        padding: 10px 15px;
+        /* Tambahkan padding untuk tombol */
+        border: 1px solid transparent;
+        /* Border transparan untuk efek hover */
+        border-radius: 4px;
+        /* Sudut melengkung */
+        transition: background-color 0.3s, border-color 0.3s;
+        /* Transisi untuk efek hover */
+    }
+
+    .navbar-extra a:hover {
+        background-color: #ffcc00;
+        /* Warna latar belakang saat hover */
+        border-color: #ffcc00;
+        /* Warna border saat hover */
+        color: #333;
+        /* Ubah warna teks saat hover */
+    }
+
+    /* Style Khusus untuk Tombol Login */
+    #login-button {
+        background-color: #fff;
+        /* Warna latar belakang tombol login */
+        color: #333;
+        /* Warna teks tombol login */
+        padding: 10px 15px;
+        /* Padding untuk tombol */
+        border-radius: 4px;
+        /* Sudut melengkung */
+        border: 1px solid #ffff;
+        /* Border dengan warna yang sama */
+        transition: background-color 0.3s, color 0.3s;
+        /* Transisi untuk efek hover */
+    }
+
+    #login-button:hover {
+        background-color: #333;
+        /* Ubah warna latar belakang saat hover */
+        color: #ffff;
+        /* Ubah warna teks saat hover */
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        /* Sembunyikan modal secara default */
+        position: fixed;
+        /* Tetap di posisi tetap */
+        z-index: 100;
+        /* Di atas elemen lain */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Lebar penuh */
+        height: 100%;
+        /* Tinggi penuh */
+        overflow: auto;
+        /* Tambahkan scroll jika diperlukan */
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Latar belakang semi-transparan */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% dari atas dan tengah */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px;
+        /* Lebar modal */
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin: 10px 0 5px;
+    }
+
+    input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            display: none;
+            /* Sembunyikan navbar-nav pada layar kecil */
+            flex-direction: column;
+            /* Atur agar item ditampilkan secara vertikal */
+            position: absolute;
+            /* Agar navbar tidak mempengaruhi layout */
+            background-color: #333;
+            /* Warna latar belakang navbar */
+            width: 100%;
+            /* Lebar penuh */
+            top: 60px;
+            /* Sesuaikan dengan tinggi navbar */
+            left: 0;
+            /* Posisi kiri */
+            z-index: 10;
+            /* Pastikan di atas elemen lain */
+        }
+
+        .navbar-nav.active {
+            display: flex;
+            /* Tampilkan navbar-nav ketika kelas 'active' ditambahkan */
+        }
+
+        .navbar-extra {
+            display: flex;
+            /* Tampilkan navbar-extra */
+        }
+
+        .navbar-extra a {
+            margin-left: 0.5rem;
+            /* Tambahkan margin untuk item di navbar-extra */
+        }
+
+        .categories li {
+            flex: 1 0 100%;
+            /* Menyelaraskan item kategori menjadi satu baris */
+        }
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        margin-top: 2rem;
+        color: #444;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
+
+    ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #777;
+    }
+
+    @media (min-width: 769px) {
+        .navbar-extra {
+            display: none;
+            /* Sembunyikan navbar-extra pada layar besar */
+        }
+    }
+</style>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</a>
+
+        <div class="navbar-nav">
+            <a href="index.html">Home</a>
+            <a href="tentangkami.html">Tentang Kami</a>
+            <a href="menu.html">Produk</a>
+            <a href="syaratdanketentuan.html">Syarat Dan Ketentuan</a>
+            <a href="forsale.html">Gallery</a>
+            <a href="contact.html">Contact Service</a>
+            <a href="#" id="login-button">Login</a> <!-- Tombol Login -->
+        </div>
+
+        <div class="navbar-extra">
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Modal Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+                <button type="submit">Login</button>
+            </form>
+            <p>Belum punya akun? <a href="register.php" id="register-link">Buat akun di sini</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Persyaratan dan Ketentuan Penyewaan Kebaya dan Aksesoris</h1>
+        <h2>1. Persyaratan Umum</h2>
+        <ul>
+            <li>Penyewa harus berusia minimal 18 tahun.</li>
+            <li>Penyewa harus memiliki identitas yang sah (KTP/SIM).</li>
+            <li>Penyewa harus memberikan informasi yang akurat dan lengkap.</li>
+        </ul>
+
+        <h2>2. Proses Penyewaan</h2>
+        <ul>
+            <li>Penyewa harus mengisi formulir penyewaan yang tersedia.</li>
+            <li>Penyewa harus melakukan pembayaran uang muka untuk mengkonfirmasi penyewaan.</li>
+            <li>Waktu penyewaan akan dimulai dari tanggal yang disepakati dalam kontrak.</li>
+        </ul>
+
+        <h2>3. Ketentuan Pengembalian</h2>
+        <ul>
+            <li>Barang yang disewa harus dikembalikan dalam kondisi baik.</li>
+            <li>Jika terjadi kerusakan, penyewa bertanggung jawab untuk mengganti rugi sesuai dengan nilai barang.</li>
+            <li>Pengembalian barang harus dilakukan pada tanggal yang telah disepakati.</li>
+        </ul>
+
+        <h2>4. Pembatalan Penyewaan</h2>
+        <ul>
+            <li>Penyewa dapat membatalkan penyewaan dengan pemberitahuan minimal 3 hari sebelum tanggal penyewaan.</li>
+            <li>Uang muka yang telah dibayarkan akan dikembalikan setelah dikurangi biaya administrasi.</li>
+        </ul>
+
+        <h2>5. Ketentuan Lain</h2>
+        <ul>
+            <li>Perusahaan berhak untuk mengubah syarat dan ketentuan ini sewaktu-waktu.</li>
+            <li>Dengan melakukan penyewaan, penyewa dianggap telah menyetujui syarat dan ketentuan yang berlaku.</li>
+        </ul>
+    </div>
+    <script>
+        // Mengubah warna navbar saat menggulir
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.style.backgroundColor = "#222"; // Warna saat menggulir
+            } else {
+                navbar.style.backgroundColor = "#333"; // Warna default
+            }
+        };
+
+        // Mendapatkan modal
+        var modal = document.getElementById("login-modal");
+
+        // Mendapatkan tombol yang membuka modal
+        var btn = document.getElementById("login-button");
+
+        // Mendapatkan elemen <span> yang menutup modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Ketika pengguna mengklik tombol, buka modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Ketika pengguna mengklik <span> (x), tutup modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Ketika pengguna mengklik di luar modal, tutup modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Menangani pengiriman form login
+        document.getElementById("login-form").onsubmit = function(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+            // Ambil nilai username dan password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Lakukan proses login (misalnya, kirim ke server)
+            console.log("Username:", username);
+            console.log("Password:", password);
+
+            // Tutup modal setelah login
+            modal.style.display = "none";
+        };
+
+        feather.replace();
+    </script>
+</body>
+
+</html>

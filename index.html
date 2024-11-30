@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sewa Disini</title>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <!--Feather Icon-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link a href="stylesheet" rel="../css/home.css">
+    <!--Aos-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        line-height: 1.6;
+        background-color: #DFF2EB;
+        color: #333;
+        padding-top: 60px;
+        /* Memberikan ruang di atas konten untuk navbar */
+        font-size: small;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #4A628A;
+        padding: 10px;
+        position: fixed;
+        /* Mengatur posisi navbar menjadi fixed */
+        top: 0;
+        /* Menempatkan navbar di bagian atas */
+        left: 0;
+        /* Menempatkan navbar di sisi kiri */
+        width: 100%;
+        /* Lebar penuh */
+        z-index: 10;
+        /* Pastikan navbar berada di atas elemen lain */
+        transition: background-color 0.3s;
+        /* Transisi untuk efek perubahan warna */
+
+    }
+
+    .navbar img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+
+    .navbar-nav {
+        display: flex;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar-nav a {
+        color: #ffff;
+        text-decoration: none;
+        margin: 0 1rem;
+        transition: color 0.3s;
+
+    }
+
+    .navbar-nav a:hover {
+        color: #ffcc00;
+        /* Highlight color on hover */
+    }
+
+    .navbar-logo span {
+        color: #F0A8D0;
+        /* Highlight color */
+    }
+
+    .navbar-logo {
+        color: #ffff;
+        text-decoration: none;
+        font-size: 24px;
+    }
+
+    .navbar-extra a {
+        color: #fff;
+        margin-left: 1rem;
+        padding: 10px 15px;
+        /* Tambahkan padding untuk tombol */
+        border: 1px solid transparent;
+        /* Border transparan untuk efek hover */
+        border-radius: 4px;
+        /* Sudut melengkung */
+        transition: background-color 0.3s, border-color 0.3s;
+        /* Transisi untuk efek hover */
+    }
+
+    .navbar-extra a:hover {
+        background-color: #ffcc00;
+        /* Warna latar belakang saat hover */
+        border-color: #ffcc00;
+        /* Warna border saat hover */
+        color: #333;
+        /* Ubah warna teks saat hover */
+    }
+
+    .categories {
+        margin-top: 20px;
+        /* Ruang di atas kategori */
+    }
+
+    .categories h2 {
+        font-size: 2rem;
+        /* Ukuran font untuk judul kategori */
+        margin-bottom: 10px;
+        /* Ruang di bawah judul */
+        text-align: center;
+        /* Menyelaraskan teks di tengah */
+    }
+
+    .categories ul {
+        list-style-type: none;
+        /* Menghapus bullet points */
+        padding: 0;
+        /* Menghapus padding */
+        display: flex;
+        /* Mengatur agar item ditampilkan dalam baris */
+        flex-wrap: wrap;
+        /* Membungkus item ke baris berikutnya jika diperlukan */
+        justify-content: center;
+        /* Menyelaraskan item di tengah */
+    }
+
+    .categories li {
+        margin: 10px;
+        /* Ruang di antara item kategori */
+        text-align: center;
+        /* Menyelaraskan teks di tengah */
+        flex: 1 0 45%;
+        /* Mengatur lebar item kategori */
+        width: 300px;
+        /* Lebar tetap untuk setiap item */
+        border: 2px solid #ccc;
+        /* Border untuk item kategori */
+        padding: 10px;
+        /* Ruang di dalam item kategori */
+        border-radius: 5px;
+        /* Sudut melengkung */
+        background-color: #f9f9f9;
+        /* Warna latar belakang item kategori */
+        margin-bottom: 20px;
+        /* Ruang di bawah item kategori */
+        font-size: 1.5rem;
+    }
+
+    .categories img {
+        display: block;
+        /* Mengubah display menjadi block */
+        margin-left: auto;
+        /* Mengubah margin-left menjadi auto */
+        margin-right: auto;
+        /* Mengubah margin-right menjadi auto */
+        width: 100%;
+        /* Mengatur lebar gambar menjadi 100% */
+        max-width: 250px;
+        /* Mengatur lebar maksimum gambar */
+        height: auto;
+        /* Mengatur tinggi gambar sesuai dengan lebar */
+        transition: opacity 0.5s ease, transfrom 0.3s ease;
+        /* Transisi untuk efek fade-in */
+    }
+
+    .categories a {
+        color: #333;
+        /* Warna teks link */
+        text-decoration: none;
+        /* Menghapus garis bawah */
+        transition: color 0.3s;
+        /* Transisi untuk efek hover */
+        display: block;
+        /* Mengatur link agar mengisi ruang yang ada */
+        margin-top: 5px;
+        /* Ruang di atas link */
+    }
+
+    .categories img.visible {
+        opacity: 1;
+
+    }
+
+    .categories img:hover {
+        transform: scale(1.1);
+    }
+
+    .categories li {
+        flex: 1 0 45%;
+        /* Mengatur lebar item kategori */
+        max-width: 300px;
+        /* Mengatur lebar maksimum item */
+    }
+
+    .categories a:hover {
+        color: #ffcc00;
+        /* Warna saat hover */
+    }
+
+    /* Style Khusus untuk Tombol Login */
+    #login-button {
+        background-color: #fff;
+        /* Warna latar belakang tombol login */
+        color: #333;
+        /* Warna teks tombol login */
+        padding: 10px 15px;
+        /* Padding untuk tombol */
+        border-radius: 3px;
+        /* Sudut melengkung */
+        border: 0.5px solid #ffff;
+        /* Border dengan warna yang sama */
+        transition: background-color 0.3s, color 0.3s;
+        /* Transisi untuk efek hover */
+    }
+
+    #login-button:hover {
+        background-color: #333;
+        /* Ubah warna latar belakang saat hover */
+        color: #ffff;
+        /* Ubah warna teks saat hover */
+    }
+
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+        text-align: center;
+        padding: 100px 20px;
+        /* Memberikan ruang di atas dan bawah */
+        background-color: #7AB2D3;
+        /* Warna latar belakang hero */
+        font-size: small;
+    }
+
+    .hero h1 {
+        font-size: 3.0rem;
+        display: center;
+        padding: 2px;
+        letter-spacing: 1px;
+        font-family: 'exo 2';
+        color: #FEFAE0;
+    }
+
+    .hero h1 span {
+        color: #ffff;
+        /* Warna khusus untuk teks 'Karawang' */
+    }
+
+    .hero p {
+        margin: 20px 0;
+        letter-spacing: 1px;
+        height: 50px;
+        width: 100%;
+        font-size: 1.3rem;
+        padding: 0.5px;
+        color: #ffff;
+    }
+
+    .cta {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .cta:hover {
+        background-color: #555;
+        /* Warna latar belakang saat hover */
+    }
+
+    /* News Section Styles */
+    .news {
+        background-color: #B3C8CF;
+        /* Warna latar belakang yang lembut */
+        padding: 40px 20px;
+        /* Padding atas dan bawah 40px, kiri dan kanan 20px */
+        border-radius: 8px;
+        /* Sudut yang membulat */
+        margin: 20px 0;
+        /* Margin atas dan bawah 20px */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* Bayangan halus */
+    }
+
+    .news h2 {
+        text-align: center;
+        /* Pusatkan judul */
+        font-family: 'Poppins', sans-serif;
+        /* Gunakan font Poppins */
+        font-size: 2rem;
+        /* Ukuran font judul */
+        margin-bottom: 20px;
+        /* Margin bawah judul */
+        color: #333;
+        /* Warna teks */
+    }
+
+    .news h2 span {
+        color: #FFCCEA;
+        /* Highlight color */
+    }
+
+    .news-item {
+        background-color: #fff;
+        /* Warna latar belakang item berita */
+        padding: 20px;
+        /* Padding di dalam item berita */
+        margin: 15px 0;
+        /* Margin atas dan bawah item berita */
+        border-radius: 5px;
+        /* Sudut yang membulat */
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        /* Bayangan halus untuk item berita */
+    }
+
+    .news-item h3 {
+        font-size: 1.5rem;
+        /* Ukuran font untuk judul berita */
+        color: #007bff;
+        /* Warna teks judul berita */
+        margin-bottom: 10px;
+        /* Margin bawah judul berita */
+    }
+
+    .news-item p {
+        font-size: 1rem;
+        /* Ukuran font untuk deskripsi berita */
+        color: #666;
+        /* Warna teks deskripsi berita */
+        line-height: 1.6;
+        /* Jarak antar baris */
+    }
+
+    footer {
+        background-color: #B3C8CF;
+        /* Warna latar belakang footer */
+        color: white;
+        /* Warna teks */
+        text-align: center;
+        /* Pusatkan teks */
+        padding: 2px 0;
+        /* Padding atas dan bawah */
+    }
+
+    .footer-image {
+        margin-top: 20px;
+        /* Margin atas untuk memberi jarak antara tautan dan gambar */
+    }
+
+    .footer-image img {
+        width: 50%;
+        /* Gambar akan mengambil 50% dari lebar kontainer */
+        max-width: 50px;
+        /* Namun, tidak lebih dari 150px */
+        height: auto;
+        /* Tinggi otomatis untuk menjaga rasio gambar */
+        padding: 10px 0;
+        margin: 10px;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+        .news {
+            padding: 20px 10px;
+            /* Mengurangi padding pada layar kecil */
+        }
+
+        .news h2 {
+            font-size: 1.5rem;
+            /* Mengurangi ukuran font judul pada layar kecil */
+        }
+
+        .news-item h3 {
+            font-size: 1.2rem;
+            /* Mengurangi ukuran font judul berita pada layar kecil */
+        }
+    }
+
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            display: none;
+            /* Sembunyikan navbar-nav pada layar kecil */
+            flex-direction: column;
+            /* Atur agar item ditampilkan secara vertikal */
+            position: absolute;
+            /* Agar navbar tidak mempengaruhi layout */
+            background-color: #333;
+            /* Warna latar belakang navbar */
+            width: 100%;
+            /* Lebar penuh */
+            top: 60px;
+            /* Sesuaikan dengan tinggi navbar */
+            left: 0;
+            /* Posisi kiri */
+            z-index: 10;
+            /* Pastikan di atas elemen lain */
+        }
+
+        .navbar-nav.active {
+            display: flex;
+            /* Tampilkan navbar-nav ketika kelas 'active' ditambahkan */
+        }
+
+        .navbar-extra {
+            display: flex;
+            /* Tampilkan navbar-extra */
+        }
+
+        .navbar-extra a {
+            margin-left: 0.5rem;
+            /* Tambahkan margin untuk item di navbar-extra */
+        }
+
+        .categories li {
+            flex: 1 0 100%;
+            /* Menyelaraskan item kategori menjadi satu baris */
+        }
+    }
+
+    @media (min-width: 769px) {
+        .navbar-extra {
+            display: none;
+            /* Sembunyikan navbar-extra pada layar besar */
+        }
+    }
+</style>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</a>
+
+        <div class="navbar-nav">
+            <a href="index.html">Home</a>
+            <a href="tentangkami.html">Tentang Kami</a>
+            <a href="menu.html">Produk</a>
+            <a href="syaratdanketentuan.html">Syarat Dan Ketentuan</a>
+            <a href="forsale.html">Gallery</a>
+            <a href="contact.html">Contact Service</a>
+            <a href="#" id="login-button">Login</a> <!-- Tombol Login -->
+        </div>
+        <div class="navbar-extra">
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Modal Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login Sebagai</h2>
+            <button id="userButton">User</button>
+            <button id="adminButton">Admin</button>
+        </div>
+    </div>
+
+
+    <!-- Hero section start -->
+    <section class="hero" id="home">
+        <main class="content" data-aos="fade-up" data-aos-duration="1000">
+            <h1>Sewa Kebaya dan Gaun <span>Karawang</span></h1>
+            <p>
+                Menyewakan beberapa jenis kebaya & gaun untuk acara pernikahan,
+                wisuda, brithday party, kondangan.
+            </p>
+            <a href="#" class="cta">Hubungi Kami</a>
+        </main>
+    </section>
+
+    <!-- Kategori Section -->
+    <div class="categories" data-aos="fade-right" data-aos-duration="1000">
+        <h2>Kategori</h2>
+        <ul>
+            <li>
+                <img src="kebaya pernikahan.jpg" alt="Kebaya Pernikahan" />
+                <a href="#">Kebaya Pernikahan</a>
+            </li>
+            <li>
+                <img src="kebaya wisuda2.jpg" alt="Gaun Wisuda" />
+                <a href="#">Gaun Wisuda</a>
+            </li>
+            <li>
+                <img src="kebaya wisuda2.jpg" alt="Gaun Pesta" />
+                <a href="#">Gaun Pesta</a>
+            </li>
+            <li>
+                <img src="kebaya tradisional.jpg" alt="Kebaya Tradisional" />
+                <a href="#">Kebaya Tradisional</a>
+            </li>
+        </ul>
+    </div>
+    </main>
+    </section>
+    <!-- Hero section end -->
+
+    <!-- News section start -->
+    <section id="news" class="news">
+        <h2>Cara Mudah Sewa Kebaya Di <span>HASOGI</span></h2>
+        <div class="news-item">
+            <h3>Cara Pertama</h3>
+            <p>
+                Pilih gaun atau kebaya desainer favoritmu di Hasogi.com.
+                Styleist kami siap membantu untuk memilih gaun/kebaya yang sesuai denganmu.
+                Chat stylist kami di bagian bawah halaman ini.
+            </p>
+        </div>
+        <div class="news-item">
+            <h3>Cara Kedua</h3>
+            <p>
+                Nikmati penampilanmu yang cantik & elegan dengan balutan karya desainer.
+                Jangan lupa untuk berbagi pengalamanmu menggunakan kebaya dan gaun dengan cara
+                menggungah foto di instagram/sosial media mu dan tag @hsl_sewakebaya
+            </p>
+        </div>
+        <div class="news-item">
+            <h3>Cara Ketiga</h3>
+            <p>
+                Untuk wilayah Karawang, kurir kami akan mengambil ditempat Anda (menggunakan ongkir).
+                Untuk luar selain itu. Kembalikan ke kami menggunakan jasa kurir lewat aplikasi.
+                Dengan alamat yang telah di sediakan.
+            </p>
+        </div>
+    </section>
+    <!-- News section end -->
+
+    <!-- Footer start -->
+    <footer>
+        <div class="footer-image">
+            <a href="https://shopee.co.id/hsl_sewakebaya"><img src="logo shoope.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+            <a href="https://www.tiktok.com/@hasogi.show.love?_t=8rd3uGKhYbR&_r=1"><img src="Real TikTok Logo.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+            <a href="https://www.instagram.com/hsl_sewakebaya?igsh=aWplaDFuNjA1aHo5"><img src="logo instagram.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!--Feather Icon-->
+    <script>
+        // Mengubah warna navbar saat menggulir
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.style.backgroundColor = "#4A628A"; // Warna saat menggulir
+            } else {
+                navbar.style.backgroundColor = "#4A628A"; // Warna default
+            }
+        };
+
+        // Animasi Gambar //
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll('.categories img');
+            images.forEach((img) => {
+                img.classList.add('visible');
+            });
+        });
+
+        // Get the modal
+        var modal = document.getElementById("loginModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        document.getElementById("login-button").onclick = function() {
+            modal.style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Handle user and admin button clicks
+        document.getElementById("userButton").onclick = function() {
+            // Redirect to user login page
+            window.location.href = "../user/user-login.php"; // Ganti dengan halaman user login yang sesuai
+        };
+
+        document.getElementById("adminButton").onclick = function() {
+            // Redirect to admin login page
+            window.location.href = "../admin/admin-login.php"; // Ganti dengan halaman admin login yang sesuai
+        };
+
+        feather.replace();
+    </script>
+
+    <!--My Javascript-->
+    <script src="../js/home.js"></script>
+    <!--Aos-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

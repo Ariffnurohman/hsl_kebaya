@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sewa Disini</title>
+
+  <!--Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!--Feather Icon-->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!--Style-->
+  <link rel="stylesheet" href="../css/tentangkami.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #F3F3E0;
+      color: #333;
+      padding-top: 60px;
+      /* Memberikan ruang di atas konten untuk navbar */
+      font-size: small;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 1rem 2rem;
+      position: fixed;
+      /* Mengatur posisi navbar menjadi fixed */
+      top: 0;
+      /* Menempatkan navbar di bagian atas */
+      left: 0;
+      /* Menempatkan navbar di sisi kiri */
+      width: 100%;
+      /* Lebar penuh */
+      z-index: 10;
+      /* Pastikan navbar berada di atas elemen lain */
+      transition: background-color 0.3s;
+      /* Transisi untuk efek perubahan warna */
+    }
+
+    .navbar-logo {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    .navbar-logo span {
+      color: #FFCCEA;
+      /* Highlight color */
+    }
+
+    .navbar-nav {
+      display: flex;
+    }
+
+    .navbar-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    .navbar-nav a:hover {
+      color: #ffcc00;
+      /* Highlight color on hover */
+    }
+
+    .navbar-extra a {
+      color: #fff;
+      margin-left: 1rem;
+      padding: 10px 15px;
+      /* Tambahkan padding untuk tombol */
+      border: 1px solid transparent;
+      /* Border transparan untuk efek hover */
+      transition: border-color 0.3s, background-color 0.3s;
+      /* Transisi untuk efek hover */
+      border-radius: 4px;
+    }
+
+    .navbar-extra a:hover {
+      border-color: #ffcc00;
+      /* Border warna saat hover */
+      background-color: #ffcc00;
+      /* Latar belakang warna saat hover */
+      color: #333;
+    }
+
+    /* Servis Section Styles */
+    .servis {
+      background: #fff;
+      padding: 2rem;
+      margin: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .servis h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .servis-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .servis-item {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .servis-item h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .servis-item p {
+      margin-bottom: 0;
+    }
+
+    /*  Style khusus untuk tombol Login */
+    #login-button {
+      background-color: #fff;
+      /* Warna latar belakang tombol login */
+      color: #333;
+      /* Warna teks tombol login */
+      padding: 10px 15px;
+      /* Padding untuk tombol */
+      border-radius: 4px;
+      border: 1px solid #ffff;
+      /* Border dengan warna yang sama */
+      transition: background-color 0.3s, color 0.3s;
+      /* Transisi untuk efek hover */
+    }
+
+    #login-button:hover {
+      background-color: #333;
+      /* Warna latar belakang tombol login
+    color: #ffff; /* Warna teks tombol login saat hover */
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* About Section Styles */
+    .about {
+      background: white;
+      padding: 2rem;
+      margin: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .about h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .about h2 span {
+      color: #608bc1;
+      /* Highlight color */
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .about-img {
+      flex: 1;
+      max-width: 400px;
+      margin-right: 2rem;
+    }
+
+    .about-img img {
+      width: 70%;
+      border-radius: 8px;
+    }
+
+    .content {
+      flex: 2;
+    }
+
+    .content h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .content p {
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background-color: #333;
+      /* Warna latar belakang footer */
+      color: white;
+      /* Warna teks */
+      text-align: center;
+      /* Pusatkan teks */
+      padding: 0.5px 0;
+      /* Padding atas dan bawah */
+
+    }
+
+    footer h1 {
+      font-size: 1rem;
+      margin: 20px 0;
+      font-family: 'exo 2', sans-serif;
+    }
+
+    .footer-image {
+      margin-top: 20px;
+      /* Margin atas untuk memberi jarak antara tautan dan gambar */
+    }
+
+    .footer-image img {
+      width: 20%;
+      /* Gambar akan mengambil 50% dari lebar kontainer */
+      max-width: 40px;
+      /* Namun, tidak lebih dari 150px */
+      height: auto;
+      /* Tinggi otomatis untuk menjaga rasio gambar */
+      padding: 10px 0;
+      margin: 10px;
+    }
+
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+
+      .navbar-nav {
+        display: none;
+        /* Sembunyikan navbar-nav pada layar kecil */
+        flex-direction: column;
+        /* Atur agar item ditampilkan secara vertikal */
+        position: absolute;
+        /* Agar navbar tidak mempengaruhi layout */
+        background-color: #333;
+        /* Warna latar belakang navbar */
+        width: 100%;
+        /* Lebar penuh */
+        top: 60px;
+        /* Sesuaikan dengan tinggi navbar */
+        left: 0;
+        /* Posisi kiri */
+        z-index: 10;
+        /* Pastikan di atas elemen lain */
+      }
+
+      .navbar-nav.active {
+        display: flex;
+        /* Tampilkan navbar-nav ketika kelas 'active' ditambahkan */
+      }
+
+      .navbar-extra {
+        display: flex;
+        /* Tampilkan navbar-extra */
+      }
+
+      .navbar-extra a {
+        margin-left: 0.5rem;
+        /* Tambahkan margin untuk item di navbar-extra */
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .about-img {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-nav a {
+        margin: 0.5rem 0;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .navbar-extra {
+        display: none;
+        /* Sembunyikan navbar-extra pada layar besar */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</a>
+
+    <div class="navbar-nav">
+        <a href="index.html">Home</a>
+        <a href="tentangkami.html">Tentang Kami</a>
+        <a href="menu.html">Produk</a>
+        <a href="syaratdanketentuan.html">Syarat Dan Ketentuan</a>
+        <a href="forsale.html">Gallery</a>
+        <a href="contact.html">Contact Service</a>
+        <a href="#" id="login-button">Login</a> <!-- Tombol Login -->
+    </div>
+
+
+    <div class="navbar-extra">
+      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login Sebagai</h2>
+      <button id="userButton">User</button>
+      <button id="adminButton">Admin</button>
+    </div>
+  </div>
+
+
+  <!-- About section start -->
+  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+    <h2><span>Tentang</span> Kami</h2>
+
+    <div class="row">
+      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
+        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
+      </div>
+      <div class="content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Selamat Datang di <span>Hasogi Show Love.</span></h3>
+        <p>
+          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
+          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
+          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About section 2 -->
+  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
+        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
+      </div>
+      <div class="content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Cerita di Balik nama Hasogi</h3>
+        <p>
+          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
+          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
+          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About section 3 -->
+  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
+        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
+      </div>
+      <div class="content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Cerita di Balik nama Hasogi</h3>
+        <p>
+          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
+          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
+          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- About section 4 -->
+  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
+        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
+      </div>
+      <div class="content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Cerita di Balik nama Hasogi</h3>
+        <p>
+          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
+          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
+          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About section 5 -->
+  <section id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+      <div class="about-img" data-aos="zoom-in" data-aos-duration="1000">
+        <img src="../logo/logo_hsl.jpeg" alt="tentang kami" />
+      </div>
+      <div class="content" data-aos="fade-right" data-aos-duration="1000">
+        <h3>Cerita di Balik nama Hasogi</h3>
+        <p>
+          Hasogi adalah tempat penyewaan kebaya di Karawnag yang menyewakan kebaya & gaun untuk berbagai ukuran dan warna.
+          Kami hadir untuk menjawab permintaan customer yang tinggi terhadap sewa kebaya di Karawang. Kami menyediakan berbagai jenis kebaya & gaun untuk menunjang
+          kegiatan anda seperti pernikahan, wisuda, pesta, kondangan, dll.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer start -->
+  <footer>
+    <section id="footer" class="footer" data-aos="fade-up" data-aos-duration="1000"></section>
+    <h1>Kunjungi Kami di</h1>
+    <div class="footer-image">
+      <a href="https://shopee.co.id/hsl_sewakebaya"><img src="../logo/logo shoope.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+        <a href="https://www.tiktok.com/@hasogi.show.love?_t=8rd3uGKhYbR&_r=1"><img src="../logo/Real TikTok Logo.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+          <a href="https://www.instagram.com/hsl_sewakebaya?igsh=aWplaDFuNjA1aHo5"><img src="../logo/logo instagram.jpg" alt="Footer Image" /> <!-- Ganti dengan path gambar Anda -->
+    </div>
+  </footer>
+
+  <!--Feather Icon-->
+  <script>
+    // Mengubah warna navbar saat menggulir
+    window.onscroll = function() {
+      const navbar = document.querySelector('.navbar');
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        navbar.style.backgroundColor = "#222"; // Warna saat menggulir
+      } else {
+        navbar.style.backgroundColor = "#333"; // Warna default
+      }
+    };
+
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    document.getElementById("login-button").onclick = function() {
+      modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    // Handle user and admin button clicks
+    document.getElementById("userButton").onclick = function() {
+      // Redirect to user login page
+      window.location.href = "../user/user-login.php"; // Ganti dengan halaman user login yang sesuai
+    };
+
+    document.getElementById("adminButton").onclick = function() {
+      // Redirect to admin login page
+      window.location.href = "../admin/admin-login.php"; // Ganti dengan halaman admin login yang sesuai
+    };
+
+    feather.replace();
+  </script>
+
+  <!--My Javascript-->
+  <script src="../js/script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>

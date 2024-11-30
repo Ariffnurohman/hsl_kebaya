@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sewa Disini</title>
+
+  <!--Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!--Feather Icon-->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!--Style-->
+  <link rel="stylesheet" href="../css/menu.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #D3F1DF;
+      color: #333;
+      padding-top: 60px;
+      /* Memberikan ruang di atas konten untuk navbar */
+      font-size: small;
+    }
+
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 1rem 2rem;
+      position: fixed;
+      /* Mengatur posisi navbar menjadi fixed */
+      top: 0;
+      /* Menempatkan navbar di bagian atas */
+      left: 0;
+      /* Menempatkan navbar di sisi kiri */
+      width: 100%;
+      /* Lebar penuh */
+      z-index: 10;
+      /* Pastikan navbar berada di atas elemen lain */
+      transition: background-color 0.3s;
+      /* Transisi untuk efek perubahan warna */
+    }
+
+
+    .navbar-logo {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    .navbar-logo span {
+      color: #ffccea;
+      /* Highlight color */
+    }
+
+    .navbar-nav {
+      display: flex;
+    }
+
+    .navbar-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    .navbar-nav a:hover {
+      color: #ffcc00;
+      /* Highlight color on hover */
+    }
+
+    .navbar-extra a {
+      color: #fff;
+      margin-left: 1rem;
+      padding: 10px 15px;
+      /* Tambahkan padding untuk tombol */
+      border: 1px solid transparent;
+      /* Border transparan untuk efek hover */
+      border-radius: 4px;
+      /* Sudut melengkung */
+      transition: background-color 0.3s, border-color 0.3s;
+      /* Transisi untuk efek hover */
+    }
+
+    /* Style Khusus untuk Tombol Login */
+    #login-button {
+      background-color: #fff;
+      /* Warna latar belakang tombol login */
+      color: #333;
+      /* Warna teks tombol login */
+      padding: 10px 15px;
+      /* Padding untuk tombol */
+      border-radius: 4px;
+      /* Sudut melengkung */
+      border: 1px solid #ffff;
+      /* Border dengan warna yang sama */
+      transition: background-color 0.3s, color 0.3s;
+      /* Transisi untuk efek hover */
+    }
+
+    #login-button:hover {
+      background-color: #333;
+      /* Ubah warna latar belakang saat hover */
+      color: #ffff;
+      /* Ubah warna teks saat hover */
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    /* Menu Section Styles */
+    .menu {
+      padding: 2rem;
+      background-color: white;
+      margin: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .menu h2 span {
+      color: #608BC1;
+      /* Highlight color */
+    }
+
+    .menu p {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+
+    /* Menu Card Styles */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .menu-card {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem;
+      flex: 1 1 calc(30% - 2rem);
+      /* 3 cards per row */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      display: flex;
+      /* Menggunakan flexbox */
+      flex-direction: column;
+      /* Mengatur arah flex menjadi kolom */
+      align-items: center;
+      /* Memusatkan item secara horizontal */
+    }
+
+    .menu-card:hover .menu-card-img {
+      transform: scale(1.1);
+      /* Zoom in saat hover */
+      opacity: 0.9;
+      /* Ubah opacity saat hover */
+    }
+
+    .menu-card-img {
+      width: 100%;
+      /* Atur lebar gambar menjadi 100% dari kontainer */
+      max-width: 200px;
+      /* Atur ukuran maksimum gambar */
+      height: auto;
+      /* Menjaga rasio aspek gambar */
+      margin: 0 auto;
+      /* Memusatkan gambar */
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      /* Transisi untuk transformasi dan opacity */
+    }
+
+    .menu-card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .more-info-btn {
+      background-color: #ffcc00;
+      /* Button color */
+      color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
+      /* Center the button */
+    }
+
+    .more-info-btn:hover {
+      background-color: #ffd700;
+      /* Lighter shade on hover */
+    }
+
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      /* Agar dropdown muncul di bawah elemen ini */
+    }
+
+    .dropdown-content {
+      display: none;
+      /* Sembunyikan dropdown secara default */
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Tampilkan dropdown saat hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Animasi ketika berpindah halaman */
+    .fade {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade.in {
+      opacity: 1;
+    }
+
+    /* Tambahkan ini ke dalam tag <style> */
+
+    @media (max-width: 768px) {
+      .navbar-nav {
+        display: none;
+        /* Sembunyikan navbar-nav pada layar kecil */
+        flex-direction: column;
+        /* Atur agar item ditampilkan secara vertikal */
+        position: absolute;
+        /* Agar navbar tidak mempengaruhi layout */
+        background-color: #333;
+        /* Warna latar belakang navbar */
+        width: 100%;
+        /* Lebar penuh */
+        top: 60px;
+        /* Sesuaikan dengan tinggi navbar */
+        left: 0;
+        /* Posisi kiri */
+        z-index: 10;
+        /* Pastikan di atas elemen lain */
+      }
+
+      .navbar-nav.active {
+        display: flex;
+        /* Tampilkan navbar-nav ketika kelas 'active' ditambahkan */
+      }
+
+      .navbar-extra {
+        display: flex;
+        /* Tampilkan navbar-extra */
+      }
+
+      .navbar-extra a {
+        margin-left: 0.5rem;
+        /* Tambahkan margin untuk item di navbar-extra */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .navbar-extra {
+        display: none;
+        /* Sembunyikan navbar-extra pada layar besar */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <!-- Navbar Start -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo"><span>Hasogi </span>Show Love.</span></a>
+
+    <div class="navbar-nav">
+      <a href="index.html">Home</a>
+      <a href="tentangkami.html">Tentang Kami</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" id="menu-utama">Produk</a>
+        <div class="dropdown-content" id="dropdown-content">
+          <a href="#kebaya">Kebaya</a>
+          <a href="#jas">Jas</a>
+          <a href="#aksesoris">Aksesoris</a>
+        </div>
+      </div>
+      <a href="syaratdanketentuan.html">Syarat Dan Ketentuan</a>
+      <a href="forsale.html">Gallery</a>
+      <a href="contact.html">Contact Service</a>
+      <a href="#" id="login-button">Login</a> <!-- Tombol Login -->
+    </div>
+
+    <div class="navbar-extra">
+      <a href="#" id="hamburger-menu" onclick="toggleNavbar()"><i data-feather="menu"></i></a>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login Sebagai</h2>
+      <button id="userButton">User</button>
+      <button id="adminButton">Admin</button>
+    </div>
+  </div>
+
+  <!--Menu Section Start-->
+  <section id="kebaya" class="menu">
+    <h2><span>Daftar</span> Kebaya</h2>
+    <p>
+      Temukan berbagai jenis kebaya untuk acara spesial Anda.
+    </p>
+
+    <div class="row">
+      <div class="menu-card">
+        <img src="kebaya tradisional.jpg" alt="Kebaya Pernikahan" class="menu-card-img" />
+        <h3 class="menu-card-title">Kebaya Pernikahan</h3>
+        <p>Elegan dan anggun untuk hari pernikahan Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;">
+          Kebaya pernikahan adalah pakaian tradisional yang disesuaikan untuk acara pernikahan. Di dalamnya terdapat motif-motif tradisional seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="kebaya tradisional.jpg" alt="Kebaya Wisuda" class="menu-card-img" />
+        <h3 class="menu-card-title">Kebaya Wisuda</h3>
+        <p>Menjadi pusat perhatian di hari wisuda Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;"> Kebaya wisuda adalah pakaian tradisional yang disesuaikan untuk acara wisuda Anda. Di dalamnya terdapat motif-motif tradisional seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="kebaya tradisional.jpg" alt="Kebaya Pesta" class="menu-card-img" />
+        <h3 class="menu-card-title">Kebaya Pesta</h3>
+        <p>Desain menawan untuk acara pesta.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;"> Kebaya pesta adalah pakaian tradisional yang disesuaikan untuk acara pesta Anda. Di dalamnya terdapat motif-motif tradisional seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+    </div>
+  </section>
+  <!--Menu Section End-->
+
+  <!--Menu Section Start for Jas-->
+  <section id="jas" class="menu">
+    <h2><span>Daftar</span> Jas</h2>
+    <p>
+      Temukan berbagai jenis jas untuk acara spesial Anda.
+    </p>
+
+    <div class="row">
+      <div class="menu-card">
+        <img src="jas.jpg" alt="Jas Formal" class="menu-card-img" />
+        <h3 class="menu-card-title">Jas Formal</h3>
+        <p>Jas elegan untuk acara formal Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;"> Jas formal adalah pakaian yang disesuaikan untuk acara formal Anda. Di dalamnya terdapat motif-motif formal seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="jas.jpg" alt="Jas Santai" class="menu-card-img" />
+        <h3 class="menu-card-title">Jas Santai</h3>
+        <p>Jas yang nyaman untuk acara santai.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;"> Jas santai adalah pakaian yang disesuaikan untuk acara santai Anda. Di dalamnya terdapat motif-motif santai seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="jas.jpg" alt="Jas Pernikahan" class="menu-card-img" />
+        <h3 class="menu-card-title">Jas Pernikahan</h3>
+        <p>Jas khusus untuk hari pernikahan Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+        <p class="description" style="display: none;">Jas santai adalah pakaian yang disesuaikan untuk acara santai Anda. Di dalamnya terdapat motif-motif santai seperti batik, kain, dan warna-warna yang mempunyai makna tersendiri.</p>
+      </div>
+    </div>
+  </section>
+  <!--Menu Section End for Jas-->
+
+  <!--Menu Section Start for Aksesoris-->
+  <section id="aksesoris" class="menu">
+    <h2><span>Daftar</span> Aksesoris</h2>
+    <p>
+      Temukan berbagai aksesoris untuk melengkapi penampilan Anda.
+    </p>
+
+    <div class="row">
+      <div class="menu-card">
+        <img src="aksesoris.jpg" alt="Dasi" class="menu-card-img" />
+        <h3 class="menu-card-title">Dasi</h3>
+        <p>Dasi elegan untuk menambah gaya Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="aksesoris.jpg" alt="Kantong" class="menu-card-img" />
+        <h3 class="menu-card-title">Kantong</h3>
+        <p>Kantong yang stylish untuk jas Anda.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+      </div>
+
+      <div class="menu-card">
+        <img src="aksesoris.jpg" alt="Jam Tangan" class="menu-card-img" />
+        <h3 class="menu-card-title">Jam Tangan</h3>
+        <p>Jam tangan yang sempurna untuk acara formal.</p>
+        <button class="more-info-btn">Lebih Banyak Info</button>
+      </div>
+    </div>
+  </section>
+  <!--Menu Section End for Aksesoris-->
+
+  <!--Feather Icon-->
+  <script>
+    // Toggle class active
+    const navbarNav = document.querySelector(".navbar-nav");
+    // Ketika hamburger menu di klik
+    document.querySelector("#hamburger-menu").onclick = () => {
+      navbarNav.classList.toggle("active");
+    };
+
+    // Klik di luar sidebar untuk menghilangkan nav
+    const hamburger = document.querySelector("#hamburger-menu");
+
+    document.addEventListener("click", function(e) {
+      if (!hamburger.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove("active");
+      }
+    });
+
+    // Toggle dropdown menu
+    document.getElementById("menu-utama").onclick = function(event) {
+      event.preventDefault(); // Mencegah link default
+      const dropdownContent = document.getElementById("dropdown-content");
+      dropdownContent.classList.toggle("show");
+    };
+
+    // Klik di luar dropdown untuk menutupnya
+    window.onclick = function(event) {
+      if (!event.target.matches('#menu-utama')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          const openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    document.getElementById("login-button").onclick = function() {
+      modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    // Handle user and admin button clicks
+    document.getElementById("userButton").onclick = function() {
+      // Redirect to user login page
+      window.location.href = "../user/user-login.php"; // Ganti dengan halaman user login yang sesuai
+    };
+
+    document.getElementById("adminButton").onclick = function() {
+      // Redirect to admin login page
+      window.location.href = "../admin/admin-login.php"; // Ganti dengan halaman admin login yang sesuai
+    };
+
+    // Ambil semua tombol "Lebih Banyak Info"
+    const infoButtons = document.querySelectorAll('.more-info-btn');
+
+    // Tambahkan event listener untuk setiap tombol
+    infoButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const description = this.nextElementSibling; // Ambil elemen keterangan berikutnya
+        if (description.style.display === "none") {
+          description.style.display = "block"; // Tampilkan keterangan
+        } else {
+          description.style.display = "none"; // Sembunyikan keterangan jika sudah ditampilkan
+        }
+      });
+    });
+
+    feather.replace();
+  </script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
